@@ -1,0 +1,9 @@
+torch>=2.0
+numpy>=1.24
+scipy>=1.10
+matplotlib>=3.7
+tqdm>=4.65
+pandas>=2.0
+# Kaggle 额外依赖（本地冒烟测试不需要）
+# networkx>=3.0
+# gensim>=4.3

@@ -1,0 +1,21 @@
+{
+  "pre_aligned": {
+    "acc_before": 0.0,
+    "acc_after": 0.0,
+    "sr_before": 26.646125661591938,
+    "sr_after": 25.634427091458516,
+    "auc": 0.25,
+    "alignment_delta": 0.26781282631841874
+  },
+  "random": {
+    "acc_before": 0.0,
+    "acc_after": 0.0,
+    "sr_before": 29.472776966735836,
+    "sr_after": 11.305331028360511
+  },
+  "deepwalk_val": {
+    "arm_cluster_acc": 0.20078125,
+    "threshold": 0.7,
+    "pass": false
+  }
+}
