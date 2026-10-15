@@ -29,7 +29,15 @@ from tqdm.auto import tqdm
 # ── 路径设置 ──
 REPO_PATH = os.environ.get("REPO_PATH", "/kaggle/working/llm-geometry-analysis")
 if not os.path.exists(REPO_PATH):
-    REPO_PATH = "/Users/mac/Documents/GitHub/llm-geometry-analysis"  # 本地回退
+    # Kaggle 舱内自动 clone 公开原仓库（本机回退到本地克隆）
+    import subprocess as _sp
+    print(f"[setup] {REPO_PATH} 不存在，git clone 原仓库 ...")
+    _rc = _sp.call(["git", "clone", "--depth", "1",
+                    "https://github.com/rsharma441/llm-geometry-analysis",
+                    REPO_PATH])
+    if _rc != 0:
+        REPO_PATH = "/Users/mac/Documents/GitHub/llm-geometry-analysis"  # 本地回退
+        print(f"[setup] clone 失败，回退本地 {REPO_PATH}")
 sys.path.insert(0, REPO_PATH)
 
 # 原仓库模块
@@ -402,7 +410,7 @@ def main():
     EVAL_EVERY = 250
     ACC_TARGET = 0.5         # 收敛阈值（义素图比 path-star 更难）
     GEO_THRESHOLD = 5.0      # stable_rank < 5 → 几何成形
-    SEEDS = [0]              # Kaggle 上建议 [0, 1, 2]
+    SEEDS = [0]              # 首飞单种子；冒烟已验证管线（2026-10-14），多种子待首飞结果
     SAVE_DIR = "/kaggle/working/results" if os.path.exists("/kaggle/working") else "./results"
     # ────────────────
 
@@ -456,6 +464,9 @@ def main():
                                   device, cfg_train, eval_every=EVAL_EVERY)
 
             # 最终指标
+            # 注：auc / alignment_delta 为单臂 path-star 度量；义素超立方体
+            # 节点被 4 条链共享（root 被 256 条共享），其值不按字面判读，
+            # 仅作记录。能力判据 = hardest_token_acc / steps_to_acc / stable_rank。
             acc = eval_hardest_token_acc(model, vocab, graph, test_leaves, device)
             align = eval_alignment_delta(model, vocab, graph)
             sr = compute_stable_rank(model, graph, vocab)["stable_rank"]

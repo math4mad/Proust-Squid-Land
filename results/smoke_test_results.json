@@ -1,21 +1,35 @@
 {
   "pre_aligned": {
     "acc_before": 0.0,
-    "acc_after": 0.0,
+    "acc_after": 0.18181818181818182,
     "sr_before": 26.646125661591938,
-    "sr_after": 25.634427091458516,
+    "sr_after": 24.54396225723296,
     "auc": 0.25,
-    "alignment_delta": 0.26781282631841874
+    "alignment_delta": 0.31318145344774484
   },
   "random": {
     "acc_before": 0.0,
-    "acc_after": 0.0,
-    "sr_before": 29.472776966735836,
-    "sr_after": 11.305331028360511
+    "acc_after": 0.4318181818181818,
+    "sr_before": 30.675514443758747,
+    "sr_after": 9.908944509988205
   },
   "deepwalk_val": {
     "arm_cluster_acc": 0.20078125,
     "threshold": 0.7,
     "pass": false
+  },
+  "deepwalk_hop_val": {
+    "mean_cos_by_hop": {
+      "1": 0.1791812990079908,
+      "2": 0.11644392137402772,
+      "3": 0.11350110357866511,
+      "4": 0.11165349249396536,
+      "5": 0.1479373605300983,
+      "6": 0.06828804314136505
+    },
+    "hop1_minus_far": 0.11089325586662574,
+    "random_hop1_mean": -0.005215313971146113,
+    "threshold": 0.05,
+    "pass": true
   }
 }
